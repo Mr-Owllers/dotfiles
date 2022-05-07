@@ -23,3 +23,15 @@ image 5: [ncmpcpp](https://github.com/ncmpcpp/ncmpcpp) (Music Player) & [cava](h
 |[polybar](https://github.com/polybar/polybar) ([the themes](https://github.com/adi1090x/polybar-themes))|
 |[rofi](https://github.com/davatorium/rofi) ([the themes](https://github.com/adi1090x/rofi))|
 |[conky](https://github.com/brndnmtthws/conky)|
+
+# :fish: Shell
+I use fish but before i used bash so i also added my [.bashrc](dot_bashrc) & [.bash_aliases](dot_bash_aliases)
+
+# 💻 Terminal
+Termite is really cool
+
+# 🪟 DE/WE
+
+i3+KDE but i also have awesomewm (I will configure it later)
+
+# 👏 And that's it
