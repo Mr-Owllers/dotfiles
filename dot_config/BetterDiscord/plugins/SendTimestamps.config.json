@@ -1,0 +1,11 @@
+{
+    "currentVersionInfo": {
+        "version": "1.1.9",
+        "hasShownChangelog": true
+    },
+    "settings": {
+        "tabIndex": 1,
+        "onLeft": false,
+        "onRight": false
+    }
+}

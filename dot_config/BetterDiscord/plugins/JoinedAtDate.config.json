@@ -1,0 +1,18 @@
+{
+	"all": {
+		"dates": {
+			"joinedAtDate": {
+				"formatString": "",
+				"dateString": "$d/$m/$yyyy",
+				"timeString": "$h:$mm"
+			}
+		},
+		"general": {
+			"displayText": true
+		},
+		"places": {
+			"userPopout": true,
+			"userProfile": true
+		}
+	}
+}

@@ -1,0 +1,15 @@
+{
+    "currentVersionInfo": {
+        "version": "1.2.1",
+        "hasShownChangelog": true
+    },
+    "settings": {
+        "customPronouns": {
+            "538827759703556106": "sh",
+            "759850502661472321": "any",
+            "580034015759826944": "hh"
+        },
+        "showOnTimestamp": true,
+        "showInUserPopout": true
+    }
+}

@@ -1,0 +1,1 @@
+(repl-toggle :url "https://git.sr.ht/~tomterl/repl-toggle" :fetcher git)

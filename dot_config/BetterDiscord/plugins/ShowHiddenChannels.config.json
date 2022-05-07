@@ -1,0 +1,24 @@
+{
+	"all": {
+		"blacklist": [
+			"776629010586271765",
+			"646041143808884756"
+		],
+		"categorydata": [],
+		"channels": {
+			"GUILD_TEXT": true,
+			"GUILD_VOICE": true,
+			"GUILD_ANNOUNCEMENT": true,
+			"GUILD_STORE": true,
+			"GUILD_STAGE_VOICE": true
+		},
+		"general": {
+			"alwaysCollapse": false,
+			"showVoiceUsers": true,
+			"showForNormal": true
+		},
+		"sortOrder": {
+			"hidden": "native"
+		}
+	}
+}

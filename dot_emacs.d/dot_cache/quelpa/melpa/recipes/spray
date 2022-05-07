@@ -1,0 +1,3 @@
+(spray
+ :url "https://git.sr.ht/~iank/spray"
+ :fetcher git)

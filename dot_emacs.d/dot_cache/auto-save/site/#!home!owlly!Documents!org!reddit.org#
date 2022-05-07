@@ -1,0 +1,13 @@
+#+TITLE: r/O.D.K
+#+DATE: <2022-1-19 Wed>
+#+AUTHOR: owll
+
+* experiment- 292b2e
+   + bot 1 [0/3]
+     + [ ] memory
+     + [ ] walking
+     + [ ] talking
+   + [fail] bot 2 [2/3]
+     + [pass] memory
+     + [fail] walking
+     + [pass] talking

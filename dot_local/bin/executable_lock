@@ -1,0 +1,3 @@
+#!/bin/bash
+scrot -o -p /tmp/screenshot.png
+betterlockscreen -u /tmp/screenshot.png -l blur 1.0, dim 30, pixel 10, 10

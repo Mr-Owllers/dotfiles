@@ -1,0 +1,2 @@
+
+(setq dotspacemacs-configuration-layers '(auto-completion better-defaults emacs-lisp git helm markdown org spell-checking syntax-checking treemacs))
