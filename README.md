@@ -12,7 +12,7 @@ image 3: Termite Terminals (Floating)
 image 4: Spotify (Customized by [spicetify](https://github.com/khanhas/spicetify-cli))
 ![image 4](./Pictures/screenshots/4.png)
 
-image 5: [ncmpcpp (Music Player)](https://github.com/ncmpcpp/ncmpcpp) & [cava (Audio Visualizer)](https://github.com/karlstav/cava)
+image 5: [ncmpcpp](https://github.com/ncmpcpp/ncmpcpp) (Music Player) & [cava](https://github.com/karlstav/cava) (Audio Visualizer)
 ![image 5](./Pictures/screenshots/5.png)
 
 |Other Things|
