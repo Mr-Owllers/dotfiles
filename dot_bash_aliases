@@ -2,11 +2,6 @@
 
 #=============================
 
-    alias openSafe="cd ~/Documents/safe && python ./safe.py"
-    alias closeSafe="cd - && clear && echo safe closed"
-
-#=============================
-
     alias reloadTerm="clear && source ~/.bashrc"
 
 #=============================
