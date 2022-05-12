@@ -1,0 +1,6 @@
+# pack-refs with: peeled fully-peeled sorted 
+6cccd632821949d5c9bee1fd2c2cda4f18bf2dd3 refs/remotes/origin/animation
+27c293c241aa5a3612a83d80c7d39ba054a60b40 refs/remotes/origin/fix-bdelete
+77dcf8730d52ecf23b43892d7b9ac9d7d086043f refs/remotes/origin/fix-buffer-closing-issues
+22e21e3f3e48ce30f48582f81bebfb97b016b9a3 refs/remotes/origin/lua-rewrite
+be65945626fb6bf6058cae61d5176d156f923c11 refs/remotes/origin/master

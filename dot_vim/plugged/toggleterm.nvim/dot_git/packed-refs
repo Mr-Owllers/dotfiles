@@ -1,0 +1,6 @@
+# pack-refs with: peeled fully-peeled sorted 
+1a71bf3509f5f72ba39865e6f06601e4f7aacadc refs/remotes/origin/bugfix/buf-delete-on-exit
+f8ed5559e3f473181dff94967eeb5ba60e534cdd refs/remotes/origin/change-direction
+c6ca20e8624d20ccaec61833f83e4b7b53994a3c refs/remotes/origin/feat/add-floating-win
+e93ae978b7d1aa96e352af96fe7a748b1e22f706 refs/remotes/origin/feature/allow-vim-wildchards
+981e207e17ecd8bf065b5b9201c1d6d2395e9338 refs/remotes/origin/master

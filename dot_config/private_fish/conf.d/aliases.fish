@@ -3,7 +3,9 @@ alias nvim='neovide $argv --neovim-bin /usr/bin/nvim'
 
 # root privileges
 alias pls='sudo'
-alias oops='sudo !!'
+
+# TheFuck
+thefuck --alias whoops| source
 
 # navigation
 alias ..='cd ..'

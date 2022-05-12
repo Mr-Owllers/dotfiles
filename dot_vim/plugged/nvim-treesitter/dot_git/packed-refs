@@ -1,0 +1,6 @@
+# pack-refs with: peeled fully-peeled sorted 
+47cfda2c6711077625c90902d7722238a8294982 refs/remotes/origin/0.5-compat
+3533721282669e945b62b3ae9c53d4c5ffe16c76 refs/remotes/origin/master
+58fae0196e4deb260734c2e0117f6a7e9261fb25 refs/remotes/origin/refactor-for-language-tree
+3533721282669e945b62b3ae9c53d4c5ffe16c76 refs/remotes/origin/update-lockfile-pr
+3533721282669e945b62b3ae9c53d4c5ffe16c76 refs/remotes/origin/update-readme-pr

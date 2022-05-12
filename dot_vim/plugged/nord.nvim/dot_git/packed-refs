@@ -1,0 +1,3 @@
+# pack-refs with: peeled fully-peeled sorted 
+1fdad275596f85bdc36c525b14697ff3a4f08bdf refs/remotes/origin/master
+a2062ec26136ceaf5a4bb3a4f27baa3b9efd66fc refs/remotes/origin/nvim_api_rewrite
