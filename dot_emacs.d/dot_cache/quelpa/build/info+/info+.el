@@ -4,13 +4,13 @@
 ;; Description: Extensions to `info.el'.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams (concat "drew.adams" "@" "oracle" ".com")
-;; Copyright (C) 1996-2021, Drew Adams, all rights reserved.
+;; Copyright (C) 1996-2022, Drew Adams, all rights reserved.
 ;; Created: Tue Sep 12 16:30:11 1995
 ;; Version: 0
 ;; Package-Requires: ()
-;; Last-Updated: Sat Oct 16 14:01:44 2021 (-0700)
+;; Last-Updated: Mon May  2 14:25:36 2022 (-0700)
 ;;           By: dradams
-;;     Update #: 7452
+;;     Update #: 7480
 ;; URL: https://www.emacswiki.org/emacs/download/info%2b.el
 ;; Doc URL: https://www.emacswiki.org/emacs/InfoPlus
 ;; Keywords: help, docs, internal
@@ -18,18 +18,21 @@
 ;;
 ;; Features that might be required by this library:
 ;;
-;;   `apropos', `apropos+', `avoid', `backquote', `bookmark',
-;;   `bookmark+', `bookmark+-1', `bookmark+-bmu', `bookmark+-key',
-;;   `bookmark+-lit', `button', `bytecomp', `cconv', `cl', `cl-lib',
-;;   `cmds-menu', `col-highlight', `crosshairs', `fit-frame',
-;;   `font-lock', `font-lock+', `frame-fns', `gv', `help+',
-;;   `help-fns', `help-fns+', `help-macro', `help-macro+',
-;;   `help-mode', `hl-line', `hl-line+', `info', `info+', `kmacro',
-;;   `macroexp', `menu-bar', `menu-bar+', `misc-cmds', `misc-fns',
-;;   `naked', `pp', `pp+', `radix-tree', `rect', `replace',
-;;   `second-sel', `strings', `syntax', `text-mode', `thingatpt',
-;;   `thingatpt+', `vline', `w32browser-dlgopen', `wid-edit',
-;;   `wid-edit+'.
+;;   `apropos', `apropos+', `auth-source', `avoid', `backquote',
+;;   `bookmark', `bookmark+', `bookmark+-1', `bookmark+-bmu',
+;;   `bookmark+-key', `bookmark+-lit', `button', `bytecomp', `cconv',
+;;   `cl', `cl-generic', `cl-lib', `cl-macs', `cmds-menu',
+;;   `col-highlight', `crosshairs', `eieio', `eieio-core',
+;;   `eieio-loaddefs', `epg-config', `fit-frame', `font-lock',
+;;   `font-lock+', `frame-fns', `gv', `help+', `help-fns',
+;;   `help-fns+', `help-macro', `help-macro+', `help-mode',
+;;   `hl-line', `hl-line+', `info', `info+', `kmacro', `macroexp',
+;;   `menu-bar', `menu-bar+', `misc-cmds', `misc-fns', `naked',
+;;   `package', `password-cache', `pp', `pp+', `radix-tree', `rect',
+;;   `replace', `second-sel', `seq', `strings', `syntax',
+;;   `tabulated-list', `text-mode', `thingatpt', `thingatpt+',
+;;   `url-handlers', `url-parse', `url-vars', `vline',
+;;   `w32browser-dlgopen', `wid-edit', `wid-edit+'.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -133,6 +136,7 @@
 ;;    `Info-fontify-custom-delimited', `Info-fontify-emphasis-flag',
 ;;    `Info-fontify-extra-function', `Info-fontify-glossary-words',
 ;;    `Info-fontify-indented-text-chars',
+;;    `Info-fontify-indented-text-manuals',
 ;;    `Info-fontify-isolated-quote-flag', `Info-fontify-quotations',
 ;;    `Info-fontify-reference-items-flag',
 ;;    `Info-glossary-fallbacks-alist', `Info-link-glossary-words',
@@ -162,11 +166,11 @@
 ;;    `Info-fontify-indented-text', `info-fontifying-regexp',
 ;;    `Info-fontify-quotations', `Info-fontify-reference-items',
 ;;    `Info-get-glossary-hash-table-create',
-;;    `Info-goto-glossary-definition', `Info-no-glossary-manuals',
+;;    `Info-goto-glossary-definition', `info-indented-text-regexp',
 ;;    `Info-insert-breadcrumbs-in-mode-line', `Info-isearch-search-p',
 ;;    `Info-manual-string', `Info-manual-symbol',
-;;    `Info-node-name-at-point', `Info-read-bookmarked-node-name',
-;;    `Info-refontify-current-node',
+;;    `Info-node-name-at-point', `Info-no-glossary-manuals',
+;;    `Info-read-bookmarked-node-name', `Info-refontify-current-node',
 ;;    `Info-remap-default-face-to-variable-pitch',
 ;;    `Info-restore-history-list' (Emacs 24.4+),
 ;;    `Info-save-history-list' (Emacs 24.4+), `Info-search-beg',
@@ -179,7 +183,8 @@
 ;;    `info-custom-delimited-same-line-regexp',
 ;;    `info-fontify-emphasis', `Info-glossary-link-history',
 ;;    `info-glossary-link-map', `info-good-fixed-pitch-font-families',
-;;    `info-isolated-backquote-regexp', `info-isolated-quote-regexp',
+;;    `info-indented-text-regexp', `info-isolated-backquote-regexp',
+;;    `info-isolated-quote-regexp',
 ;;    `info-last-non-nil-fontify-extra-function',
 ;;    `info-last-non-nil-fontify-glossary-words', `Info-link-faces',
 ;;    `Info-merged-map', `Info-mode-syntax-table', `info-nomatch',
@@ -383,13 +388,6 @@
 ;;      `foobar, are highlighted if `Info-fontify-quotations' and
 ;;      `Info-fontify-isolated-quote-flag' are both non-`nil'.
 ;;
-;;    - Non-nil option `Info-fontify-indented-text-chars' means
-;;      fontify text that is indented at least that many characters
-;;      (default 10).  In the Elisp manual this often means blocks of
-;;      code and ASCII-art diagrams.  But in general there's no
-;;      telling what is indented at any given level, so caveat emptor.
-;;      Think of this as an experimental feature.
-;;
 ;;    - Emphasized text, that is, text enclosed in underscore
 ;;      characters, like _this is emphasized text_, is
 ;;      highlighted if `Info-fontify-emphasis-flag' is non-`nil'.
@@ -444,6 +442,23 @@
 ;;      or an `Info-toggle-fontify-*' command.  For example, command
 ;;      `Info-toggle-fontify-emphasis' toggles option
 ;;      `Info-fontify-emphasis-flag'.
+;;
+;;    - Minor mode `Info-variable-pitch-text-mode' uses a
+;;      variable-pitch font for Info text.  If you enable this then
+;;      you might also want to customize option
+;;      `Info-fontify-indented-text-chars', so indented text such as
+;;      code uses a fixed-pitch font (face `info-indented-text').
+;;
+;;    - Non-nil option `Info-fontify-indented-text-chars' means
+;;      fontify text that is indented at least that many characters
+;;      (default 10).  In the Elisp manual this often means blocks of
+;;      code and ASCII-art diagrams.  But in general there's no
+;;      telling what is indented at any given level, so caveat emptor.
+;;      Think of this as an experimental feature.
+;;
+;;    - Option `Info-fontify-indented-text-manuals' is a list of
+;;      manuals that should use `Info-fontify-indented-text-chars'.
+;;      By default this is just the Elisp manual: (elisp).
 ;;
 ;;    - You can define specific highlighting for individual manuals.
 ;;      To do this, you `put' the regexp you want for a given regexp
@@ -621,6 +636,12 @@
 ;;
 ;;; Change Log:
 ;;
+;; 2022/05/02 dadams
+;;     info-display-manual: Apply bug #54961's (partial) fix.
+;; 2021/12/24 dadams
+;;     Added: Info-fontify-indented-text-manuals, function and variable info-indented-text-regexp.
+;; 2021/11/11 dadams
+;;     Bind Info-url-for-node to W.
 ;; 2021/10/16 dadams
 ;;     Added: Info-toggle-fontify-extra, info-last-non-nil-fontify-extra-function.
 ;;     Info-fontify-extra-function is now a user option.
@@ -1367,6 +1388,7 @@
 (define-key Info-mode-map "G"               'Info-goto-node-web)
 (define-key Info-mode-map "O"               'Info-toc-outline)
 (define-key Info-mode-map "v"               'Info-virtual-book)
+(define-key Info-mode-map "W"               'Info-url-for-node)
 (define-key Info-mode-map (kbd "C-x DEL")   'Info-change-visited-status)
 ;; Mouse back and forward buttons
 (define-key Info-mode-map [S-down-mouse-2]  'Info-mouse-follow-nearest-node-new-window)
@@ -1912,6 +1934,17 @@ avoid fontifying continuation lines of menu-item descriptions."
           (integer :tag "Fontify text indented at least this many chars" :value 10))
   :group 'Info-Plus)
 
+;;;###autoload
+(defcustom Info-fontify-indented-text-manuals '(elisp)
+  "List of manuals for which to use fixed-pitch for indented text.
+This has no effect if `Info-fontify-indented-text-chars' is nil."
+  :type '(repeat (symbol :tag "Manual")) :group 'info
+  :set #'(lambda (sym defs)
+           (custom-set-default sym defs)
+           (mapatoms (lambda (x) (put x 'info-indented-text-regexp nil)))
+           (dolist (manual  (symbol-value sym))
+             (put manual 'info-indented-text-regexp 'info-indented-text-regexp))))
+
 
 (define-obsolete-variable-alias 'Info-fontify-single-quote-flag 'Info-fontify-isolated-quote-flag "2020-10-22")
 ;;;###autoload
@@ -2115,6 +2148,9 @@ You can use command `Info-define-custom-delimiting' (or command
 regexp.  They prompt you for the delimiters to use.
 
 \(You can of course also let-bind this in Lisp code.\)")
+
+(defvar info-indented-text-regexp info-nomatch
+  "Dummy value.  Function `info-indented-text-regexp' is used instead.")
 
 (defvar info-isolated-backquote-regexp "`\\(.\\|\n\\)"
   ;; Another possibility: "[^`]`"
@@ -3531,6 +3567,8 @@ virtual book) using \\<Info-mode-map>`\\[Info-save-current-node]' (`Info-save-cu
   (info)
   (Info-find-node 'toc "Top"))
 
+;; Vanilla Emacs added this from Info+ on 2021-11-11, in response to bug #44895.
+;;
 ;;;###autoload (autoload 'Info-goto-node-web "info+")
 (defun Info-goto-node-web (node &optional flip-new-win)
   "Use `browse-url' to go to Info node NODE using a Web browser.
@@ -3577,6 +3615,9 @@ manual.  Empty NODE in (MANUAL) defaults to the `Top' node."
 ;;    string can never occur otherwise; it is an arbitrary choice,
 ;;    standing for “GNU Texinfo”.) This is necessary because XHTML
 ;;    requires that identifiers begin with a letter.
+;;
+;;
+;; Vanilla Emacs added this from Info+ on 2021-11-11, in response to bug #44895.
 ;;
 ;;;###autoload (autoload 'Info-url-for-node "info+")
 (defun Info-url-for-node (node)
@@ -3800,7 +3841,9 @@ form: `(MANUAL) NODE' (e.g.,`(emacs) Modes')."
 
 ;; REPLACE ORIGINAL in `info.el':
 ;;
-;; 1. Added optional arg LITERALP.  Use apropos matching, not literal-string matching, by default.
+;; 1. Added optional arg LITERALP.
+;;    Use apropos matching, not literal-string matching, by default.
+;;    This is the _opposite_ of the vanilla behavior after the botched fix of bug #31807.
 ;; 2. Added optional args ARG and NARG.
 ;; 3. Handle prefix arg: can match literally and can choose the manuals to search.
 ;; 4. Use other window, unless already in Info.
@@ -3813,14 +3856,14 @@ form: `(MANUAL) NODE' (e.g.,`(emacs) Modes')."
 Present a menu of the possible matches.
 The manuals to search are defined by option `Info-apropos-manuals'.
 
-With a prefix arg, match PATTERN as a literal string, not as a regexp
-or keywords.
-
 Just as for commands such as `apropos', PATTERN can be a word, a list
 of words (separated by spaces), or a regexp (using some regexp special
 characters).  If it is a word, search for matches for that word as a
 substring.  If it is a list of words, search for matches for any
-two (or more) of those words."
+two (or more) of those words.
+
+With a prefix arg, match PATTERN as a literal string, not as a regexp
+or keywords.  (Vanilla Emacs version of this command has it backward.)"
   (interactive (list (apropos-read-pattern "index entries") current-prefix-arg))
   (apropos-parse-pattern pattern)
   (if (equal apropos-regexp "")
@@ -6856,7 +6899,10 @@ Otherwise, visit the manual in a new Info buffer.
 
 With a prefix arg (Emacs 24.4+), completion candidates are limited to
 currently visited manuals."
-  (interactive (let ((manuals  (Info--manuals current-prefix-arg)))
+  (interactive (let* ((_IGNORE  (info-initialize))
+                      (manuals  (Info--manuals current-prefix-arg)))
+                 (when (fboundp 'info--filter-manual-names) ; Emacs 29, bug #54961.
+                   (setq manuals  (info--filter-manual-names manuals)))
                  (list (completing-read "Display manual: " manuals nil t))))
   (let ((blist             (buffer-list))
         (manual-re         (concat "\\(/\\|\\`\\)" manual "\\(\\.\\|\\'\\)"))
@@ -6949,6 +6995,14 @@ If no current Info manual, then return nil."
   "Return the value of `info-custom-delimited-same-line-regexp'.
 Value for current manual, if non-nil, else global value."
   (info-fontifying-regexp 'info-custom-delimited-same-line-regexp))
+
+(defun info-indented-text-regexp ()
+  "Set and return value of variable `info-indented-text-regexp'.
+The value is for current manual.  It is based on option
+`Info-fontify-indented-text-chars', and it applies only to manuals in
+option `Info-fontify-indented-text-manuals'."
+  (setq info-indented-text-regexp  (format "^ \\{%d,\\}.*" (abs Info-fontify-indented-text-chars)))
+  (info-fontifying-regexp 'info-indented-text-regexp))
 
 (defun info-isolated-backquote-regexp ()
   "Return the value of `info-isolated-backquote-regexp'.

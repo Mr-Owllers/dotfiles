@@ -1,12 +1,12 @@
-;;; -*- coding: utf-8 -*-
-(("/home/owlly/.emacs.d/.cache/recentf" . 674)
+;;; -*- coding: utf-8; mode: lisp-data -*-
+(("/home/owlly/.emacs.d/.cache/.custom-settings" . 271)
+ ("/home/owlly/.emacs.d/.cache/recentf" . 674)
  ("/home/owlly/.emacs.d/.cache/layouts/persp-auto-save" . 1657)
  ("/home/owlly/Documents/org/example.org" . 4)
  ("/home/owlly/Documents/org/"
   (dired-filename . "/home/owlly/Documents/org/what-sell.org"))
  ("/home/owlly/Documents/"
   (dired-filename . "/home/owlly/Documents/org"))
- ("/home/owlly/.emacs.d/.cache/.custom-settings" . 271)
  ("/home/owlly/.emacs.d/elpa/27.2/develop/unfill-20210106.220/unfill-autoloads.el" . 850)
  ("/home/owlly/.spacemacs" . 27300)
  ("/home/owlly/.emacs.d/elpa/27.2/develop/mwim-20181110.1900/mwim-autoloads.el" . 1490)
