@@ -109,7 +109,7 @@
     }
 
     function clickQueueButton() {
-        document.querySelector(".control-button-wrapper .spoticon-queue-16").click();
+        document.querySelector(".main-nowPlayingBar-right .control-button-wrapper > button").click();
     }
 
     function clickNavigatingBackButton() {
@@ -145,19 +145,19 @@
     }
 
     function nextSong() {
-        document.querySelector(".main-skipForwardButton-button").click();
+        document.querySelector("button[aria-label='Next']").click();
     }
 
     function previousSong() {
-        document.querySelector(".main-skipBackButton-button").click();
+        document.querySelector("button[aria-label='Previous']").click();
     }
 
     function increaseVolume() {
-        Spicetify.Player.origin.setVolume(Spicetify.Player.getVolume() + 0.1);
+        Spicetify.Player.setVolume(Spicetify.Player.getVolume() + 0.05);
     }
 
     function decreaseVolume() {
-        Spicetify.Player.origin.setVolume(Spicetify.Player.getVolume() - 0.1);
+        Spicetify.Player.setVolume(Spicetify.Player.getVolume() - 0.05);
     }
 
     /**
@@ -165,7 +165,7 @@
      * @param {KeyboardEvent} event
      */
     function openSearchPage(event) {
-        const searchInput = document.querySelector(".main-topBar-topbarContentWrapper input");
+        const searchInput = document.querySelector(".main-topBar-container input");
         if (searchInput) {
             searchInput.focus();
         } else {
@@ -205,7 +205,7 @@
     }
 
     function focusOnApp() {
-        return document.querySelector("main .os-viewport");
+        return document.querySelector(".Root__main-view .os-viewport");
     }
 
     /**

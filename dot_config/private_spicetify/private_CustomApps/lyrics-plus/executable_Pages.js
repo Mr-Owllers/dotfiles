@@ -1,5 +1,5 @@
 const CreditFooter = react.memo(({ provider, copyright }) => {
-    const credit = [Spicetify.Locale.get("lyrics.providedBy", provider)];
+    const credit = [Spicetify.Locale.get("web-player.lyrics.providedBy", provider)];
     if (copyright) {
         credit.push(...copyright.split("\n"));
     }
@@ -531,7 +531,8 @@ const GeniusPage = react.memo(
         );
 
         let mainContainer = [lyricsEl1];
-        const shouldSplit = versions.length > 1 && isSplitted;
+        //remove "&& false" below to restore the split display
+        const shouldSplit = versions.length > 1 && isSplitted && false;
 
         if (shouldSplit) {
             const lyricsEl2 = react.createElement(

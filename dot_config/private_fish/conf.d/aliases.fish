@@ -1,3 +1,6 @@
+# i3
+alias i3-kde="env KDEWM=/usr/bin/i3 startplasma-x11"
+
 # nvim
 alias nvim='neovide $argv --neovim-bin /usr/bin/nvim'
 
@@ -123,9 +126,6 @@ alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
 
 # bare git repo alias for dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
-
-# termbin
-alias tb='nc termbin.com 9999'
 
 # the terminal rickroll
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'

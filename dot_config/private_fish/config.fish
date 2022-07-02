@@ -10,7 +10,7 @@
 # First line removes the path; second line sets it.  Without the first line,
 # your path gets massive and fish becomes very slow.
 set -e fish_user_paths
-set -U fish_user_paths $HOME/.local/bin $HOME/Applications $fish_user_paths
+set -U fish_user_paths $HOME/.local/bin $HOME/Applications $HOME/.cargo/bin $fish_user_paths
 
 ### EXPORT
 set fish_greeting                                 # Supresses fish's intro message
@@ -103,7 +103,6 @@ end
 # Spark functions
 function letters
     cat $argv | awk -vFS='' '{for(i=1;i<=NF;i++){ if($i~/[a-zA-Z]/) { w[tolower($i)]++} } }END{for(i in w) print i,w[i]}' | sort | cut -c 3- | spark | lolcat
-    printf  '%s\n' 'abcdefghijklmnopqrstuvwxyz'  ' ' | lolcat
 end
 
 function commits
@@ -206,4 +205,4 @@ end
 
 set -x N_PREFIX "$HOME/n"; contains "$N_PREFIX/bin" $PATH; or set -a PATH "$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
-# source ~/.config/fish/conf.d/autostart.fish && source ~/.config/fish/conf.d/aliases.fish
+# source ~/.config/fish/conf.d/autostart.fish && source ~/.config/fish/conf.d/aliases.fishfish_add_path /home/owlly/.spicetify

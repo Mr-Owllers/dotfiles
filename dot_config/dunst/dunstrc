@@ -239,3 +239,7 @@ timeout = 15
 #    urgency = normal
 #
 # vim: ft=cfg
+
+[spotify]
+    appname = Spotify
+    format = "<b>%a</b>\n%b"

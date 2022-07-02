@@ -28,5 +28,7 @@
     "SpotifyControls": true,
     "SpotifyListenAlong": true,
     "MessageLoggerV2": true,
-    "XenoLib": true
+    "XenoLib": true,
+    "BetterCodeblocks": false,
+    "InvisibleTyping": false
 }

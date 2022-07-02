@@ -1,4 +1,4 @@
-// Run "npm i @type/react" to have this type package available in workspace
+// Run "npm i @types/react" to have this type package available in workspace
 /// <reference types="react" />
 /// <reference path="../../globals.d.ts" />
 
@@ -60,7 +60,7 @@ const CONFIG = {
         },
         musixmatch: {
             on: getConfig("lyrics-plus:provider:musixmatch:on"),
-            desc: `Fully compatible with Spotify. Requires a token that can be retrieved from the official Musixmatch app. Follow instructions on <a href="https://github.com/khanhas/spicetify-cli/wiki/Musixmatch-Token">spicetify Wiki</a>.`,
+            desc: `Fully compatible with Spotify. Requires a token that can be retrieved from the official Musixmatch app. Follow instructions on <a href="https://spicetify.app/docs/faq#sometimes-popup-lyrics-andor-lyrics-plus-seem-to-not-work">Spicetify Docs</a>.`,
             token: localStorage.getItem("lyrics-plus:provider:musixmatch:token") || "21051986b9886beabe1ce01c3ce94c96319411f8f2c122676365e3",
             modes: [SYNCED, UNSYNCED],
         },
@@ -162,7 +162,7 @@ class LyricsContainer extends react.Component {
     async fetchColors(uri) {
         let prominent = 0;
         try {
-            const colors = await CosmosAsync.get(`hm://colorextractor/v1/extract-presets?uri=${uri}&format=json`);
+            const colors = await CosmosAsync.get(`wg://colorextractor/v1/extract-presets?uri=${uri}&format=json`);
             prominent = colors.entries[0].color_swatches[4].color;
         } catch {
             prominent = 0;
@@ -196,16 +196,23 @@ class LyricsContainer extends react.Component {
     }
 
     async tryServices(trackInfo, mode = -1) {
+        let unsynclyrics;
         for (const id of CONFIG.providersOrder) {
             const service = CONFIG.providers[id];
             if (!service.on) continue;
             if (mode !== -1 && !service.modes.includes(mode)) continue;
 
             const data = await Providers[id](trackInfo);
-            if (!data.error && (data.karaoke || data.synced || data.unsynced || data.genius)) {
+            if (!data.error && (data.karaoke || data.synced || data.genius)) {
                 CACHE[data.uri] = data;
                 return data;
+            } else if (!data.error && data.unsynced) {
+                unsynclyrics = data;
             }
+        }
+        if (unsynclyrics) {
+            CACHE[unsynclyrics.uri] = unsynclyrics;
+            return unsynclyrics;
         }
         const empty = { ...emptyState, uri: trackInfo.uri };
         CACHE[trackInfo.uri] = empty;
@@ -255,7 +262,11 @@ class LyricsContainer extends react.Component {
 
     async onVersionChange(items, index) {
         if (this.state.mode === GENIUS) {
-            this.setState({ ...emptyLine, genius2: this.state.genius2, isLoading: true });
+            this.setState({
+                ...emptyLine,
+                genius2: this.state.genius2,
+                isLoading: true,
+            });
             const lyrics = await ProviderGenius.fetchLyricsVersion(items, index);
             this.setState({
                 genius: lyrics,
@@ -267,7 +278,11 @@ class LyricsContainer extends react.Component {
 
     async onVersionChange2(items, index) {
         if (this.state.mode === GENIUS) {
-            this.setState({ ...emptyLine, genius: this.state.genius, isLoading: true });
+            this.setState({
+                ...emptyLine,
+                genius: this.state.genius,
+                isLoading: true,
+            });
             const lyrics = await ProviderGenius.fetchLyricsVersion(items, index);
             this.setState({
                 genius2: lyrics,
